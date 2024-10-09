@@ -15,6 +15,7 @@ lerna-debug.log*
 glue.md
 # OS
 .DS_Store
+db.sqlite
 
 # Tests
 /coverage
