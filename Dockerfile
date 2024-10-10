@@ -1,8 +1,8 @@
 FROM node:20.18-alpine3.20
 WORKDIR /app
-COPY package*.json .
+COPY yarn.lock package.json ./
 COPY . .
-RUN yarn
+RUN yarn install --ignore-engines
 CMD [ "yarn", "start:dev" ]
 
 EXPOSE 3001
