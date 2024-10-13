@@ -1,8 +1,11 @@
 POST http://localhost:3001/auth/signup
 content-type: application/json
 
+
 {
     "email": "lucas7justino@gmail.com",
     "username": "lucasjstn",
     "password": "minhasenhapoderosa"
 }
+
+

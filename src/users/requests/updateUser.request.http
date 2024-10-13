@@ -1,0 +1,15 @@
+PATCH http://localhost:3001/auth/1
+Content-Type: application/json
+
+{
+    "email": "lucas8justino@gmail.com"
+}
+
+### PATCH
+PATCH http://localhost:3001/auth/1
+Content-Type: application/json
+
+{
+    "email": "lucas8justino@gmail.com",
+    "password": "minhasenhamudou"
+}
