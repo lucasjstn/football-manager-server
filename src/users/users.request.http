@@ -1,8 +1,0 @@
-POST http://localhost:3000/auth/signup
-content-type: application/json
-
-{
-    "email": "lucas7justino@gmail.com",
-    "username": "lucasjstn",
-    "password": "minhasenhapoderosa"
-}
