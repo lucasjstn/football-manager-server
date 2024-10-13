@@ -11,11 +11,6 @@ import { SinginUserDto } from "./dtos/signin-user.dto";
 export class UsersController {
     constructor(private usersService: UsersService, private authService: AuthService) { }
 
-    @Post('/signup')
-    @Serialize(UserDto)
-    createUser(@Body() body: CreateUserDto) {
-        return this.authService.signup(body.email, body.password, body.username );
-    }
 
     @Serialize(UserDto)
     @Get('/:id')
@@ -37,6 +32,12 @@ export class UsersController {
     updateUser(@Param('id') id: string, @Body() body: UpdateUserDto) {
         return this.usersService.update(parseInt(id), body);
 
+    }
+
+    @Post('/signup')
+    @Serialize(UserDto)
+    createUser(@Body() body: CreateUserDto) {
+        return this.authService.signup(body.email, body.password, body.username );
     }
 
     @Post('/signin')
