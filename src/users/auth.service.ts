@@ -6,20 +6,16 @@ import {
 import { UsersService } from './users.service';
 import { randomBytes, scrypt as _scrypt } from 'crypto';
 import { promisify } from 'util';
-import * as bcrypt from 'bcrypt'
 
 const scrypt = promisify(_scrypt);
 
 @Injectable()
 export class AuthService {
 
-    private readonly saltRounds = 10; // Definindo o custo do bcrypt
-
     constructor(private usersService: UsersService) { }
 
     async signup(email: string, password: string, username: string) {
         const [users] = await this.usersService.find(username);
-
 
         if (users?.email && users?.username) {
             throw new BadRequestException('email in use');
@@ -52,23 +48,20 @@ export class AuthService {
 
         const [user] = await this.usersService.find(username);
 
-        if(!user){
+        if (!user) {
             throw new NotFoundException('user not found');
         }
 
         console.log(user);
-        
+
         const [salt, storedHash] = user.password.split('.');
 
         const hash = (await scrypt(password, salt, 32)) as Buffer;
         console.log(storedHash);
         console.log(hash.toString('hex'));
-        if(storedHash !== hash.toString('hex')) {
+        if (storedHash !== hash.toString('hex')) {
             throw new BadRequestException('bad password');
         }
-
-       
-        
 
         return user;
 
@@ -91,15 +84,6 @@ export class AuthService {
 
         // return user; // Retorna o usuário se as credenciais forem válidass
     }
-
-    private async hashPassword(password: string): Promise<string> {
-        return await bcrypt.hash(password, this.saltRounds);
-    }
-
-    private async comparePasswords(password: string, hash: string): Promise<boolean> {
-        return await bcrypt.compare(password, hash);
-    }
-
 }
 
 
