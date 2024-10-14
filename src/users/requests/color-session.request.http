@@ -1,0 +1,5 @@
+### Get color
+GET http://localhost:3001/auth/colors/red
+
+### Get All Colors
+GET http://localhost:3001/auth/colors
