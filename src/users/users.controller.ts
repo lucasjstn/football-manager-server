@@ -12,6 +12,11 @@ import { SinginUserDto } from "./dtos/signin-user.dto";
 export class UsersController {
     constructor(private usersService: UsersService, private authService: AuthService) { }
 
+    @Post('/signout')
+    signOut(@Session() session: any) {
+        session.userId = null;
+    }
+
     @Get('/whoami')
     whoAmI(@Session() session: any) {
         return this.usersService.findOne(session.userId);
