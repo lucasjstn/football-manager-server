@@ -1,11 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseInterceptors, ClassSerializerInterceptor, Session } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Session } from "@nestjs/common";
 import { CreateUserDto } from "./dtos/create-user.dto";
 import { UsersService } from "./users.service";
 import { UpdateUserDto } from "./dtos/update-user.dto";
-import { Serialize, SerializeInterceptor } from "src/interceptors/serialize.interceptors";
+import { Serialize  } from "src/interceptors/serialize.interceptors";
 import { UserDto } from "./dtos/user.dto";
 import { AuthService } from "./auth.service";
 import { SinginUserDto } from "./dtos/signin-user.dto";
+import { CurrentUser } from "./decorators/current-user.decorator";
+import { User } from "./users.entity";
 
 @Controller('auth')
 @Serialize(UserDto)
@@ -17,9 +19,14 @@ export class UsersController {
         session.userId = null;
     }
 
+    // @Get('/whoami')
+    // whoAmI(@Session() session: any) {
+    //     return this.usersService.findOne(session.userId);
+    // }
+
     @Get('/whoami')
-    whoAmI(@Session() session: any) {
-        return this.usersService.findOne(session.userId);
+    whoAmI(@CurrentUser() user: User) {
+        return user;
     }
 
     @Post('/signup')
