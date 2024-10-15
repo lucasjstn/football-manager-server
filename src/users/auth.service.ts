@@ -52,13 +52,10 @@ export class AuthService {
             throw new NotFoundException('user not found');
         }
 
-        console.log(user);
-
         const [salt, storedHash] = user.password.split('.');
 
         const hash = (await scrypt(password, salt, 32)) as Buffer;
-        console.log(storedHash);
-        console.log(hash.toString('hex'));
+
         if (storedHash !== hash.toString('hex')) {
             throw new BadRequestException('bad password');
         }
@@ -67,16 +64,12 @@ export class AuthService {
 
         // const [user] = await this.usersService.find(username);
 
-        // console.log(user);
-
         // if (!user) {
         //     throw new NotFoundException('user not found');
         // }
 
 
         // const isPasswordValid = await this.comparePasswords(password, user.password);
-
-        // console.log(isPasswordValid);
 
         // if (!isPasswordValid) {
         //     throw new BadRequestException('Invalid password');
