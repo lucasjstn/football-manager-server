@@ -54,5 +54,10 @@ describe('AuthService', () => {
             await expect(service.signup('asdf@asdf.com', '12345678', 'username')).rejects.toThrow(BadRequestException);
     });
 
-   
+    it('throws if signin is called with an unused email', async () => {
+
+        await expect(
+            service.signin('username', '')
+        ).rejects.toThrow(NotFoundException);
+    });
 })
