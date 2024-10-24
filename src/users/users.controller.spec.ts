@@ -86,7 +86,6 @@ describe('UsersController', () => {
       session,
     );
 
-    console.log(user);
     expect(user.id).toEqual(1);
     expect(session.userId).toEqual(1);
   });
