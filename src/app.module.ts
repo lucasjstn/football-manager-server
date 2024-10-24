@@ -33,6 +33,6 @@ export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(cookieSession({
       keys: ['secretsecret'],
-    }))
+    })).forRoutes('*')
   }
 }
