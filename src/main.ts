@@ -6,16 +6,6 @@ const cookieSession = require('cookie-session');
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.use(
-    cookieSession({
-      keys: ['secretsecret'],
-    }),
-  );
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-    }),
-  );
 
   const config = new DocumentBuilder()
     .setTitle('Football Manager API')
