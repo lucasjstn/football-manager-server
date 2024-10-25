@@ -13,7 +13,7 @@ describe('Authentication System (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     await app.init();
-  });
+  }, 25000);
 
   it('handles a singup request', () => {
     const username = 'username';

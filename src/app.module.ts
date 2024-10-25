@@ -12,6 +12,7 @@ const cookieSession = require('cookie-session');
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath: `.env`
     }),
     TypeOrmModule.forRootAsync({
       useClass: DbConfigService,
